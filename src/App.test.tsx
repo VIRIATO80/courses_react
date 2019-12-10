@@ -1,9 +1,27 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders title of the page', () => {
   const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const titulo = getByText(/Catálogo de cursos/i);
+  expect(titulo).toBeInTheDocument();
 });
+
+test('shows the form when the button is pressed', () => {
+  const testMessage = 'Crear nuevo curso';
+  const {queryByText, getByLabelText, getByText} = render(
+    <App />,
+  )
+
+  // Form should be hidden on load
+  expect(queryByText(testMessage)).toBeNull()
+
+  // Click on the button
+  fireEvent.click(getByText(/Añadir curso/i))
+
+  // .toBeInTheDocument() is an assertion that comes from jest-dom
+  // otherwise you could use .toBeDefined()
+  expect(getByText(testMessage)).toBeDefined()
+})
+
