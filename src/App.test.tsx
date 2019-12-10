@@ -20,8 +20,6 @@ test('shows the form when the button is pressed', () => {
   // Click on the button
   fireEvent.click(getByText(/Añadir curso/i))
 
-  // .toBeInTheDocument() is an assertion that comes from jest-dom
-  // otherwise you could use .toBeDefined()
   expect(getByText(testMessage)).toBeDefined()
 })
 
