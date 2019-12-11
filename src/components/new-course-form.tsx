@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Level, Teacher} from "../types/types";
+import {Level, Teacher, API_URL} from "../types/types";
 
 
 
@@ -27,7 +27,7 @@ export default class NewCourseForm extends React.Component {
 
     componentDidMount(){
 
-        fetch('http://localhost:8080/teachers')
+        fetch(API_URL+'/teachers')
         .then(res => res.json())
         .then((data) => {
           this.setState({ loading:true, teachers: data });
@@ -49,7 +49,7 @@ export default class NewCourseForm extends React.Component {
         
         this.setState({ loading: true, submitSuccess: true });
         
-        fetch('http://localhost:8080/courses', {
+        fetch(API_URL + '/courses', {
             method: 'POST',
             body: JSON.stringify(this.state), 
             headers:{

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Course, Ordering} from "../types/types";
+import {Course, Ordering, API_URL} from "../types/types";
 // Import React Table
 import ReactTable from "react-table";
 import "react-table/react-table.css";
@@ -23,7 +23,7 @@ export default class CoursesList extends React.Component {
   
   componentDidMount(){
 
-    fetch('http://localhost:8080/courses')
+    fetch(API_URL+'/courses')
     .then(res => res.json())
     .then((data) => {
       this.setState({ isLoaded:true, courses: data });
@@ -46,7 +46,7 @@ export default class CoursesList extends React.Component {
         document.getElementsByClassName("titleHeader")[0].classList.remove('-sort-asc');
       }
 
-      fetch('http://localhost:8080/courses?order='+this.state.ordering)
+      fetch(API_URL+'/courses?order='+this.state.ordering)
       .then(res => res.json())
       .then((data) => {
         this.setState({courses: data});
